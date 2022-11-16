@@ -3373,10 +3373,14 @@ BDD::XorExistAbstract(
 
 BDD
 BDD::UnivAbstract(
-  const BDD& cube) const
+  const BDD& cube, unsigned int limit) const
 {
     DdManager *mgr = checkSameManager(cube);
-    DdNode *result = Cudd_bddUnivAbstract(mgr, node, cube.node);
+    DdNode* result = nullptr;
+    if (limit == 0)
+        result = Cudd_bddUnivAbstract(mgr, node, cube.node);
+    else
+        result = Cudd_bddUnivAbstractLimit(mgr, node, cube.node, limit);
     checkReturnValue(result);
     return BDD(p, result);
 

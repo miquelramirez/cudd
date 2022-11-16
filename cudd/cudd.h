@@ -316,7 +316,7 @@ typedef void (*DD_TOHFP)(DdManager *, void *);
   @sideeffect none
 
   @see Cudd_Complement Cudd_IsComplement
-
+in
 */
 #define Cudd_Regular(node) ((DdNode *)((uintptr_t)(node) & ~(uintptr_t) 01))
 
@@ -662,6 +662,7 @@ extern int Cudd_bddUnbindVar(DdManager *dd, int index);
 extern int Cudd_bddVarIsBound(DdManager *dd, int index);
 extern DdNode * Cudd_addExistAbstract(DdManager *manager, DdNode *f, DdNode *cube);
 extern DdNode * Cudd_addUnivAbstract(DdManager *manager, DdNode *f, DdNode *cube);
+extern DdNode * Cudd_addUnivAbstractLimit(DdManager *manager, DdNode *f, DdNode *cube, unsigned int limit);
 extern DdNode * Cudd_addOrAbstract(DdManager *manager, DdNode *f, DdNode *cube);
 extern DdNode * Cudd_addApply(DdManager *dd, DD_AOP op, DdNode *f, DdNode *g);
 extern DdNode * Cudd_addPlus(DdManager *dd, DdNode **f, DdNode **g);
