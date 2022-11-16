@@ -251,6 +251,44 @@ Cudd_bddUnivAbstract(
 } /* end of Cudd_bddUnivAbstract */
 
 
+
+DdNode *
+Cudd_addUnivAbstractLimit(
+        DdManager * manager,
+        DdNode * f,
+        DdNode * cube,
+        unsigned int limit)
+{
+    DdNode		*res;
+
+    unsigned int saveLimit = manager->maxLive;
+
+    if (bddCheckPositiveCube(manager, cube) == 0) {
+        (void) fprintf(manager->err,"Error:  Can only abstract cubes");
+        manager->errorCode = CUDD_INVALID_ARG;
+        return(NULL);
+    }
+
+    manager->maxLive = (manager->keys - manager->dead) + (manager->keysZ - manager->deadZ) + limit;
+
+    do {
+        manager->reordered = 0;
+        res = cuddAddUnivAbstractRecur(manager, Cudd_Not(f), cube);
+    } while (manager->reordered == 1);
+
+    manager->maxLive = saveLimit;
+
+    if (res != NULL) res = Cudd_Not(res);
+
+    if (manager->errorCode == CUDD_TIMEOUT_EXPIRED && manager->timeoutHandler) {
+        manager->timeoutHandler(manager, manager->tohArg);
+    }
+
+    return(res);
+
+} /* end of Cudd_addUnivAbstract */
+
+
 /**
   @brief Computes the boolean difference of f with respect to x.
 

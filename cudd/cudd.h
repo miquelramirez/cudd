@@ -662,7 +662,6 @@ extern int Cudd_bddUnbindVar(DdManager *dd, int index);
 extern int Cudd_bddVarIsBound(DdManager *dd, int index);
 extern DdNode * Cudd_addExistAbstract(DdManager *manager, DdNode *f, DdNode *cube);
 extern DdNode * Cudd_addUnivAbstract(DdManager *manager, DdNode *f, DdNode *cube);
-extern DdNode * Cudd_addUnivAbstractLimit(DdManager *manager, DdNode *f, DdNode *cube, unsigned int limit);
 extern DdNode * Cudd_addOrAbstract(DdManager *manager, DdNode *f, DdNode *cube);
 extern DdNode * Cudd_addApply(DdManager *dd, DD_AOP op, DdNode *f, DdNode *g);
 extern DdNode * Cudd_addPlus(DdManager *dd, DdNode **f, DdNode **g);
@@ -729,6 +728,7 @@ extern DdNode * Cudd_bddExistAbstract(DdManager *manager, DdNode *f, DdNode *cub
 extern DdNode * Cudd_bddExistAbstractLimit(DdManager * manager, DdNode * f, DdNode * cube, unsigned int limit);
 extern DdNode * Cudd_bddXorExistAbstract(DdManager *manager, DdNode *f, DdNode *g, DdNode *cube);
 extern DdNode * Cudd_bddUnivAbstract(DdManager *manager, DdNode *f, DdNode *cube);
+extern DdNode * Cudd_bddUnivAbstractLimit(DdManager *manager, DdNode *f, DdNode *cube, unsigned int limit);
 extern DdNode * Cudd_bddBooleanDiff(DdManager *manager, DdNode *f, int x);
 extern int Cudd_bddVarIsDependent(DdManager *dd, DdNode *f, DdNode *var);
 extern double Cudd_bddCorrelation(DdManager *manager, DdNode *f, DdNode *g);
